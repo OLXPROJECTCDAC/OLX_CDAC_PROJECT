@@ -124,6 +124,14 @@ commands and what it does
 | `git checkout dev`       | Switches your working folder to the `dev` branch        |
 | `git pull origin dev`    | Updates your local `dev` with the latest remote changes |
 
+| Command                      | Purpose                                               |
+| ---------------------------- | ----------------------------------------------------- |
+| `git checkout branch-name`   | Switch to an existing branch                          |
+| `git checkout -b new-branch` | Create and switch to a new branch from current branch |
+| `git branch`                 | List all local branches                               |
+| `git branch -a`              | List all local + remote branches                      |
+| `git branch -d branch-name`  | Delete a local branch                                 |
+| `git branch -M main`         | Rename current branch to `main`                       |
 
 
 git checkout feature/your-name-task
