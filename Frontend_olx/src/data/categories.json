@@ -1,0 +1,34 @@
+[
+    {
+        "label": "Cars",
+        "icon": "🚗"
+    },
+    {
+        "label": "Mobiles",
+        "icon": "📱"
+    },
+    {
+        "label": "Bikes",
+        "icon": "🏍️"
+    },
+    {
+        "label": "Furniture",
+        "icon": "🛋️"
+    },
+    {
+        "label": "Electronics",
+        "icon": "💻"
+    },
+    {
+        "label": "Fashion",
+        "icon": "👗"
+    },
+    {
+        "label": "Pets",
+        "icon": "🐶"
+    },
+    {
+        "label": "Books",
+        "icon": "📚"
+    }
+]
