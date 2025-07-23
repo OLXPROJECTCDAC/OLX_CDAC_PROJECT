@@ -1,1 +1,4 @@
-Hello
+function HomePage(){
+
+}
+export default HomePage;
