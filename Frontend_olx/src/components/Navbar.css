@@ -1,18 +1,25 @@
-/* ------------------------------------------------------------------
-   Avatar Button
-   ------------------------------------------------------------------ */
+/* src/components/Navbar/Navbar.css */
+
+/* ——— Location select tweaks ——— */
+.nav-select {
+    min-width: 120px;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* ——— Avatar button: circle, shadow, size ——— */
 .avatar-btn {
     width: 40px;
     height: 40px;
-    background-color: #0f7ef1;
-    /* OLX‑blue */
-    color: #fff;
-    /* initials */
-    border: 2px solid #fff;
-    /* white ring */
+    padding: 0;
     border-radius: 50%;
-    /* perfect circle */
     display: flex;
+    background-color: blueviolet;
+    color: white;
     align-items: center;
     justify-content: center;
     font-weight: 600;
@@ -27,30 +34,33 @@
     /* hide default caret */
 }
 
-/* ------------------------------------------------------------------
-     Profile Link Under Name
-     ------------------------------------------------------------------ */
+/* ——— Dropdown sizing & spacing ——— */
+.dropdown-menu {
+    min-width: 260px;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.dropdown-header {
+    padding: 0.75rem 1rem;
+}
+
+.dropdown-item {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-divider {
+    margin: 0.25rem 0;
+}
+
+/* ——— Profile‑link under name ——— */
 .profile-link {
-    color: #0f7ef1;
+    color: var(--bs-primary);
     text-decoration: none;
     font-size: 0.875rem;
 }
 
 .profile-link:hover {
     text-decoration: underline;
-}
-
-/* ------------------------------------------------------------------
-     Dropdown Menu Sizing & Spacing
-     ------------------------------------------------------------------ */
-.dropdown-menu {
-    min-width: 260px;
-    border-radius: 8px;
-}
-
-/* ------------------------------------------------------------------
-     Divider Spacing
-     ------------------------------------------------------------------ */
-.dropdown-divider {
-    margin: 4px 0;
 }
