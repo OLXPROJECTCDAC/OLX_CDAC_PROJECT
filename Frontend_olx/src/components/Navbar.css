@@ -1,0 +1,56 @@
+/* ------------------------------------------------------------------
+   Avatar Button
+   ------------------------------------------------------------------ */
+.avatar-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #0f7ef1;
+    /* OLX‑blue */
+    color: #fff;
+    /* initials */
+    border: 2px solid #fff;
+    /* white ring */
+    border-radius: 50%;
+    /* perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.avatar-btn::after {
+    content: none;
+    /* hide default caret */
+}
+
+/* ------------------------------------------------------------------
+     Profile Link Under Name
+     ------------------------------------------------------------------ */
+.profile-link {
+    color: #0f7ef1;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+     Dropdown Menu Sizing & Spacing
+     ------------------------------------------------------------------ */
+.dropdown-menu {
+    min-width: 260px;
+    border-radius: 8px;
+}
+
+/* ------------------------------------------------------------------
+     Divider Spacing
+     ------------------------------------------------------------------ */
+.dropdown-divider {
+    margin: 4px 0;
+}
