@@ -11,6 +11,10 @@ import { ChakraProvider, } from '@chakra-ui/react'
 import AdminPanel from './pages/AdminPanel.jsx'
 import AdminPanelCategories from './pages/AdminPanelCategories.jsx'
 import AdminPanelOrders from './pages/AdminPanelOrders.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import Signup from './pages/SignUpPage';
+import UpdateUser from './pages/UpdateUser.jsx'
+import ForgetPassword from './pages/ForgetPassword.jsx'
 
 
 
@@ -22,10 +26,16 @@ createRoot(document.getElementById('root')).render(
   
       <Routes>
         <Route path="/" element={<HomePage />} />
+        
         <Route path="/AdminPanel" element={<AdminPanel/>} />
         <Route path="/AdminPanel/categories" element={<AdminPanelCategories/>}/>
         <Route path="/AdminPanel/orders" element = {<AdminPanelOrders/>}></Route>
         <Route path="*" element={<div>Page Not Found</div>} />
+        
+        <Route path="/login" element ={<LoginPage/>}/>
+        <Route path="/signup" element = {<Signup/>}/>
+        <Route path="/update-user" element={<UpdateUser/>}/>
+        <Route path="/forgetPassword" element={<ForgetPassword/>}/>
       </Routes>
 
      </ChakraProvider >
