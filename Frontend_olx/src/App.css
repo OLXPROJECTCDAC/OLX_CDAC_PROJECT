@@ -1,5 +1,26 @@
+.adminpanel-img img {
+    border-radius: 50%;
+    width: 75%;
+}
 
-.adminpanel-img img{
-    border-radius:50%;
-    width:75%;
+/* Full-width Navbar: handled by default via Bootstrap */
+.full-width-navbar {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Page container for rest of the content */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Optional: Styling for cards or sections */
+.section {
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
 }
