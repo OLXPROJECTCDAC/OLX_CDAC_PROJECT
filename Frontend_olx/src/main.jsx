@@ -15,6 +15,9 @@ import LoginPage from './pages/LoginPage.jsx'
 import Signup from './pages/SignUpPage';
 import UpdateUser from './pages/UpdateUser.jsx'
 import ForgetPassword from './pages/ForgetPassword.jsx'
+import AdminPanelProducts from './pages/AdminPanelProducts.jsx'
+import AdminPanelSearchProduct from './pages/AdminPanelSearchProduct.jsx'
+import AdminPanelProductList from './pages/AdminPanelProductsList.jsx'
 
 
 
@@ -30,12 +33,16 @@ createRoot(document.getElementById('root')).render(
         <Route path="/AdminPanel" element={<AdminPanel/>} />
         <Route path="/AdminPanel/categories" element={<AdminPanelCategories/>}/>
         <Route path="/AdminPanel/orders" element = {<AdminPanelOrders/>}></Route>
-        <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="/AdminPanel/Products" element={<AdminPanelProducts/>}/>
+        <Route path="/AdminPanel/List" element={<AdminPanelProductList/>}/>
+        <Route path="/AdminPanel/SearchProduct" element={<AdminPanelSearchProduct/>}/>
+       
         
         <Route path="/login" element ={<LoginPage/>}/>
         <Route path="/signup" element = {<Signup/>}/>
         <Route path="/update-user" element={<UpdateUser/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
+        <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
 
      </ChakraProvider >
