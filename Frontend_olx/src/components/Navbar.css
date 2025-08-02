@@ -1,0 +1,66 @@
+/* src/components/Navbar/Navbar.css */
+
+/* ——— Location select tweaks ——— */
+.nav-select {
+    min-width: 120px;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* ——— Avatar button: circle, shadow, size ——— */
+.avatar-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    background-color: blueviolet;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.avatar-btn::after {
+    content: none;
+    /* hide default caret */
+}
+
+/* ——— Dropdown sizing & spacing ——— */
+.dropdown-menu {
+    min-width: 260px;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.dropdown-header {
+    padding: 0.75rem 1rem;
+}
+
+.dropdown-item {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-divider {
+    margin: 0.25rem 0;
+}
+
+/* ——— Profile‑link under name ——— */
+.profile-link {
+    color: var(--bs-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
