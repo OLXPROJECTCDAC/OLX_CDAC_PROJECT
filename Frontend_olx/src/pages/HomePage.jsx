@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, VStack } from '@chakra-ui/react';
 
 // Importing modular components
 import Navbar from '../components/Navbar';
@@ -7,26 +8,22 @@ import Categories from '../components/Categories';
 import ListingsGrid from '../components/ListingsGrid';
 import Footer from '../components/Footer';
 
-/**
- * HomePage Component
- * Combines all main sections: Navbar, Banner, Categories, Listings, Footer
- */
 const HomePage = () => {
     return (
-        <>
+        <Box>
             {/* Top Navigation Bar */}
             <Navbar />
 
             {/* Main Page Content */}
-            <div className="page-container">
+            <VStack spacing={{ base: 4, md: 6 }} align="stretch" mt={2}>
                 <Banner />         {/* Carousel banner at top - Ads */}
                 <Categories />     {/* Scrollable category section */}
                 <ListingsGrid />   {/* Grid of listing cards */}
-            </div>
+            </VStack>
 
             {/* Bottom Footer */}
             <Footer />
-        </>
+        </Box>
     );
 };
 

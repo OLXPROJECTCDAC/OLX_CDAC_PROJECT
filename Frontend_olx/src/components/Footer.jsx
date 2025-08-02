@@ -1,81 +1,119 @@
 import React from "react";
+import {
+  Box,
+  Flex,
+  Text,
+  Link,
+  Image,
+  HStack,
+  VStack,
+  Icon,
+  SimpleGrid,
+} from "@chakra-ui/react";
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
-/**
- * Footer Component
- * Contains:
- * - Popular Locations
- * - Company Info (About, Careers, Contact)
- * - Social Media Links
- * - Bottom Bar with Logo & Copyright
- */
 const Footer = () => {
-    return (
-        <>
-            {/* ---------- Top Section ---------- */}
-            <div className="bg-light text-dark py-4">
-                <div className="container">
-                    <div className="row justify-content-center">
+  return (
+    <>
+      {/* ---------- Top Section ---------- */}
+      <Box bg="gray.100" color="gray.800" py={8} px={4}>
+        <SimpleGrid
+          columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
+          spacing={8}
+          maxW="container.lg"
+          mx="auto"
+        >
+          {/* Popular Locations */}
+          <VStack align="start" spacing={2}>
+            <Text fontWeight="bold" fontSize="sm">
+              POPULAR LOCATIONS
+            </Text>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Kolkata</Link>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Mumbai</Link>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Chennai</Link>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Pune</Link>
+          </VStack>
 
-                        {/* Popular Locations Column */}
-                        <div className="col-md-4">
-                            <h6 className="fw-bold">POPULAR LOCATIONS</h6>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-decoration-none text-dark">Kolkata</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Mumbai</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Chennai</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Pune</a></li>
-                            </ul>
-                        </div>
+          {/* Company Information */}
+          <VStack align="start" spacing={2}>
+            <Text fontWeight="bold" fontSize="sm">
+              COMPANY
+            </Text>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>About Us</Link>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Careers</Link>
+            <Link href="#" fontSize="sm" color="gray.700" _hover={{ color: "blue.500" }}>Contact Us</Link>
+          </VStack>
 
-                        {/* Company Information Column */}
-                        <div className="col-md-4">
-                            <h6 className="fw-bold">COMPANY</h6>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-decoration-none text-dark">About Us</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Careers</a></li>
-                                <li><a href="#" className="text-decoration-none text-dark">Contact Us</a></li>
-                            </ul>
-                        </div>
+          {/* Social Media */}
+          <VStack align="start" spacing={3}>
+            <Text fontWeight="bold" fontSize="sm">
+              FOLLOW US
+            </Text>
+            <HStack spacing={4}>
+              <Link href="#" color="gray.700" _hover={{ color: "blue.500" }}>
+                <Icon as={FaFacebook} boxSize={5} />
+              </Link>
+              <Link href="#" color="gray.700" _hover={{ color: "blue.500" }}>
+                <Icon as={FaTwitter} boxSize={5} />
+              </Link>
+              <Link href="#" color="gray.700" _hover={{ color: "blue.500" }}>
+                <Icon as={FaInstagram} boxSize={5} />
+              </Link>
+              <Link href="#" color="gray.700" _hover={{ color: "blue.500" }}>
+                <Icon as={FaYoutube} boxSize={5} />
+              </Link>
+            </HStack>
+          </VStack>
 
-                        {/* Social Media Icons Column */}
-                        <div className="col-md-4">
-                            <h6 className="fw-bold">FOLLOW US</h6>
-                            <div className="d-flex gap-3 mb-3">
-                                <a href="#" className="text-dark"><i className="bi bi-facebook fs-5"></i></a>
-                                <a href="#" className="text-dark"><i className="bi bi-twitter fs-5"></i></a>
-                                <a href="#" className="text-dark"><i className="bi bi-instagram fs-5"></i></a>
-                                <a href="#" className="text-dark"><i className="bi bi-youtube fs-5"></i></a>
-                            </div>
-                        </div>
+          {/* Other Platforms */}
+          <VStack align="start" spacing={3}>
+            <Text fontWeight="bold" fontSize="sm">
+              OTHER PLATFORMS
+            </Text>
+            <Link href="#" isExternal>
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                alt="Google Play Store"
+                height="40px"
+              />
+            </Link>
+            <Link href="#" isExternal>
+              <Image
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Apple App Store"
+                height="40px"
+              />
+            </Link>
+          </VStack>
+        </SimpleGrid>
+      </Box>
 
-                    </div>
-                </div>
-            </div>
+      {/* ---------- Bottom Bar ---------- */}
+      <Box bg="blue.500" color="white" py={4} px={4}>
+        <Flex
+          maxW="container.xl"
+          mx="auto"
+          justify="space-between"
+          align="center"
+          direction={{ base: "column", md: "row" }}
+          textAlign={{ base: "center", md: "left" }}
+          gap={3}
+        >
+          {/* Logo */}
+          <HStack justify={{ base: "center", md: "flex-start" }}>
+            <Image
+              src="https://statics.olx.in/external/base/img/cartrade/logo/olx_2025.svg?v=1"
+              alt="OLX"
+              boxSize="50px"
+            />
+          </HStack>
 
-            {/* ---------- Bottom Bar Section ---------- */}
-            <div className="bg-primary text-white py-3 mt-2">
-                <div className="container-fluid px-5 d-flex flex-column flex-md-row justify-content-between align-items-center">
-
-                    {/* OLX Logo */}
-                    <div className="d-flex gap-4 align-items-center mb-2 mb-md-0">
-                        <img
-                            src="https://statics.olx.in/external/base/img/cartrade/logo/olx_2025.svg?v=1"
-                            alt="OLX"
-                            width="50"
-                        />
-                    </div>
-
-                    {/* Copyright */}
-                    <div>
-                        <small className="text-white">
-                            All rights reserved © 2006-2025 OLX
-                        </small>
-                    </div>
-
-                </div>
-            </div>
-        </>
-    );
+          {/* Copyright */}
+          <Text fontSize="sm">All rights reserved © 2006-2025 OLX</Text>
+        </Flex>
+      </Box>
+    </>
+  );
 };
 
 export default Footer;

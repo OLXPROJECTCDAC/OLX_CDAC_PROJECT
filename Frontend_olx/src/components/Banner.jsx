@@ -1,64 +1,69 @@
-// src/components/Banner.jsx
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { Box, Image, IconButton, Flex } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import bannerData from '../data/bannerData.json'; // ✅ Importing banner data from JSON
 
 const Banner = () => {
+    const banners = bannerData; // Using imported JSON data
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+    };
+
     return (
-        <div id="olxBanner" className="carousel slide mb-4" data-bs-ride="carousel">
-
-            {/* Carousel Images */}
-            <div className="carousel-inner">
-
-                {/* Banner 1 - Active */}
-                <div className="carousel-item active">
-                    <img
-                        src="https://www.wordstream.com/wp-content/uploads/2021/07/banner-ads-examples-ncino.jpg"
-                        className="d-block w-100"
-                        alt="Banner 1"
-                        style={{ maxHeight: '300px', objectFit: 'cover' }}
-                    />
-                </div>
-
-                {/* Banner 2 */}
-                <div className="carousel-item">
-                    <img
-                        src="https://www.wordstream.com/wp-content/uploads/2021/07/banner-ads-examples-aws.jpg"
-                        className="d-block w-100"
-                        alt="Banner 2"
-                        style={{ maxHeight: '300px', objectFit: 'cover' }}
-                    />
-                </div>
-
-                {/* Banner 3 */}
-                <div className="carousel-item">
-                    <img
-                        src="https://www.brafton.com/wp-content/uploads/2024/04/types-of-banner-hero.png"
-                        className="d-block w-100"
-                        alt="Banner 3"
-                        style={{ maxHeight: '300px', objectFit: 'cover' }}
-                    />
-                </div>
-            </div>
+        <Box
+            position="relative"
+            width="100%"
+            maxW="container.xl"
+            mx="auto"
+            overflow="hidden"
+            mb={{ base: 3, md: 5 }}
+        >
+            {/* Carousel Image (Responsive) */}
+            <Image
+                src={banners[currentIndex].image}
+                alt={`Banner ${currentIndex + 1}`}
+                width="100%"
+                maxH={{ base: "180px", sm: "240px", md: "320px" }}
+                objectFit="contain"  // ✅ No cropping
+                borderRadius="md"
+                bg="gray.200" // Fills background behind contained image
+            />
 
             {/* Carousel Controls */}
-            <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#olxBanner"
-                data-bs-slide="prev"
+            <Flex
+                justify="space-between"
+                align="center"
+                position="absolute"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                px={{ base: 1, sm: 2 }}
             >
-                <span className="carousel-control-prev-icon" />
-            </button>
-
-            <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#olxBanner"
-                data-bs-slide="next"
-            >
-                <span className="carousel-control-next-icon" />
-            </button>
-        </div>
+                <IconButton
+                    icon={<ChevronLeftIcon boxSize={{ base: 6, md: 8 }} />}
+                    onClick={prevSlide}
+                    variant="ghost"
+                    colorScheme="whiteAlpha"
+                    size={{ base: "sm", md: "lg" }}
+                    aria-label="Previous Banner"
+                />
+                <IconButton
+                    icon={<ChevronRightIcon boxSize={{ base: 6, md: 8 }} />}
+                    onClick={nextSlide}
+                    variant="ghost"
+                    colorScheme="whiteAlpha"
+                    size={{ base: "sm", md: "lg" }}
+                    aria-label="Next Banner"
+                />
+            </Flex>
+        </Box>
     );
 };
 
