@@ -1,3 +1,4 @@
+```
 spring-boot-backend/
 ├── src/
 │   ├── main/
@@ -32,9 +33,7 @@ spring-boot-backend/
 │
 ├── pom.xml (or build.gradle)                            # Project build config
 └── README.md
-
-
-
+```
 
 Notes:
 config/: Contains global configurations such as security, CORS, Swagger, or custom beans.

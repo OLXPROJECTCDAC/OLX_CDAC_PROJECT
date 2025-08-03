@@ -1,33 +1,42 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Box, Text, Flex } from '@chakra-ui/react';
 import categories from '../data/categories.json'; // Import JSON data
 
 const Categories = () => {
-    return (
-        <div className="container my-4">
-            {/* Section Title */}
-            <h5 className="mb-3">Browse Categories</h5>
+  return (
+    <Box maxW="container.lg" mx="auto" my={4}>
+      {/* Section Title */}
+      <Text fontSize="lg" fontWeight="bold" mb={3}>
+        Browse Categories
+      </Text>
 
-            {/* Scrollable category cards */}
-            <div className="d-flex overflow-auto gap-3">
-                {categories.map((category, index) => (
-                    <div
-                        key={index}
-                        className="text-center px-3 py-2 border rounded"
-                        style={{ minWidth: '100px', cursor: 'pointer' }}
-                    >
-                        {/* Emoji Icon */}
-                        <div style={{ fontSize: '1.8rem' }}>{category.icon}</div>
+      {/* Scrollable category cards */}
+      <Flex overflowX="auto" gap={3}>
+        {categories.map((category, index) => (
+          <Box
+            key={index}
+            textAlign="center"
+            px={3}
+            py={2}
+            borderWidth="1px"
+            borderRadius="md"
+            minW="100px"
+            cursor="pointer"
+            _hover={{ boxShadow: 'md', transform: 'scale(1.05)', transition: '0.2s' }}
+            flexShrink={0}
+          >
+            {/* Emoji Icon */}
+            <Text fontSize="2xl">{category.icon}</Text>
 
-                        {/* Category Label */}
-                        <div style={{ fontSize: '0.9rem', marginTop: '5px' }}>
-                            {category.label}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+            {/* Category Label */}
+            <Text fontSize="sm" mt={1}>
+              {category.label}
+            </Text>
+          </Box>
+        ))}
+      </Flex>
+    </Box>
+  );
 };
 
 export default Categories;

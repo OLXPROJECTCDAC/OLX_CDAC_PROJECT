@@ -1,73 +1,78 @@
 import React, { useState } from 'react';
+import { Box, Image, IconButton, Badge, Text, Flex } from '@chakra-ui/react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
-/**
- * ListingCard Component
- * Displays a product listing card with image, title, price, location, and wishlist toggle.
- *
- * Props:
- * - data: {
- *     image: string,
- *     title: string,
- *     price: number,
- *     location: string,
- *     date: string,
- *     featured: boolean
- *   }
- */
 const ListingCard = ({ data }) => {
-    const [liked, setLiked] = useState(false); // Track heart/wishlist toggle
+    const [liked, setLiked] = useState(false);
 
-    if (!data) return null; // Prevent rendering if no data passed
+    if (!data) return null;
 
     return (
-        <div className="card h-100 border-0 shadow-sm listing-card">
-
-            {/* Image Section */}
-            <div className="position-relative">
-                <img
+        <Box
+            borderWidth="1px"
+            borderRadius="md"
+            overflow="hidden"
+            shadow="sm"
+            bg="white"
+            display="flex"
+            flexDirection="column"
+            height="100%"
+            _hover={{ shadow: 'md', transform: { base: 'none', md: 'scale(1.02)' }, transition: '0.2s' }}
+        >
+            {/* Image */}
+            <Box position="relative">
+                <Image
                     src={data.image}
                     alt={data.title}
-                    className="card-img-top"
-                    style={{
-                        height: '200px',
-                        objectFit: 'cover',
-                        borderTopLeftRadius: '8px',
-                        borderTopRightRadius: '8px',
-                    }}
+                    height={{ base: "160px", sm: "180px", md: "200px" }} // Responsive image height
+                    width="100%"
+                    objectFit="cover"
+                    borderTopRadius="md"
                 />
-
-                {/* Wishlist Button (Heart icon) */}
-                <button
-                    className="btn btn-light position-absolute top-0 end-0 m-2 p-1 rounded-circle"
+                <IconButton
+                    icon={liked ? <FaHeart color="red" /> : <FaRegHeart />}
                     onClick={() => setLiked(!liked)}
-                    title="Add to Wishlist"
-                >
-                    {liked ? <FaHeart color="red" /> : <FaRegHeart />}
-                </button>
-            </div>
+                    aria-label="Add to Wishlist"
+                    variant="ghost"
+                    size="sm"
+                    position="absolute"
+                    top={2}
+                    right={2}
+                    bg="white"
+                    borderRadius="full"
+                    shadow="sm"
+                    _hover={{ bg: 'gray.100' }}
+                />
+            </Box>
 
-            {/* Content Section */}
-            <div className="card-body p-2">
+            {/* Content */}
+            <Box p={{ base: 2, md: 3 }} flex="1" display="flex" flexDirection="column" justifyContent="space-between">
+                <Box>
+                    {data.featured ? (
+                        <Badge colorScheme="yellow" mb={2} fontSize={{ base: "xs", md: "sm" }}>
+                            FEATURED
+                        </Badge>
+                    ) : (
+                        <Box height="20px" mb={2} />
+                    )}
+                    <Text fontWeight="bold" fontSize={{ base: "sm", md: "md" }} mb={1}>
+                        ₹ {data.price}
+                    </Text>
+                    <Text fontSize={{ base: "xs", md: "sm" }} noOfLines={2} minHeight="32px">
+                        {data.title}
+                    </Text>
+                </Box>
 
-                {/* Featured Badge */}
-                {data.featured && (
-                    <span className="badge bg-warning text-dark mb-2">FEATURED</span>
-                )}
-
-                {/* Price */}
-                <h6 className="card-title fw-bold mb-1">₹ {data.price}</h6>
-
-                {/* Title */}
-                <p className="card-text mb-2 text-truncate">{data.title}</p>
-
-                {/* Location & Date Row */}
-                <div className="d-flex justify-content-between">
-                    <small className="text-muted">{data.location}</small>
-                    <small className="text-muted">{data.date}</small>
-                </div>
-            </div>
-        </div>
+                <Flex justify="space-between" mt={2}>
+                    <Text fontSize={{ base: "xs", md: "xs" }} color="gray.500" isTruncated>
+                        {data.location}
+                    </Text>
+                    <Text fontSize={{ base: "xs", md: "xs" }} color="gray.500">
+                        {data.date}
+                    </Text>
+                </Flex>
+            </Box>
+        </Box>
     );
 };
 
