@@ -29,5 +29,5 @@ jobs:
 
       - name: Build and analyze
         working-directory: olx_backend
-        run: mvn clean verify sonar:sonar -Dsonar.projectKey=Upcyclex -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn clean verify sonar:sonar -Dsonar.projectKey=Upcyclex -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
