@@ -30,7 +30,7 @@ public class ProductsEntity extends BaseEntity {
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "price", nullable = false)
     private Double price;
 
     @ManyToOne
