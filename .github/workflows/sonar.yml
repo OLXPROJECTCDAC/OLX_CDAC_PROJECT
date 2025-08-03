@@ -28,5 +28,6 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Build and analyze
+        working-directory: olx_backend
         run: mvn clean verify sonar:sonar -Dsonar.projectKey=your_project_key -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
