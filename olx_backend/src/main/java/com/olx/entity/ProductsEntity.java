@@ -36,4 +36,6 @@ public class ProductsEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
     private LocationEntity location;
+
 }
+
