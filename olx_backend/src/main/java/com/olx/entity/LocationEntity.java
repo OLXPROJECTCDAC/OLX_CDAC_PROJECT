@@ -1,59 +1,39 @@
 package com.olx.entity;
 
-
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDateTime;
-
 import com.olx.Enum.Area;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "locations")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class LocationEntity {
+@Getter
+@Setter
+@ToString
+public class LocationEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "location_id")
-    private Integer locationId;
-
-    @Column(nullable = false, length = 100)
+    @Column(name = "state", nullable = false, length = 100)
     private String state;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "city", nullable = false, length = 100)
     private String city;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
+    @Column(name = "area", nullable = false, length = 150)
     private Area area;
 
-    @Column(nullable = false, length = 10)
+    @Column(name = "pincode", nullable = false, length = 10)
     private String pincode;
 
-    // For map integration (Google Maps, Leaflet, etc.)
-    @Column(precision = 9, scale = 6)
+    @Column(name = "latitude")
     private Double latitude;
 
-    @Column(precision = 9, scale = 6)
+    @Column(name = "longitude")
     private Double longitude;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 }
