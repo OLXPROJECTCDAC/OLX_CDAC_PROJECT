@@ -59,5 +59,5 @@ public class UserEntity extends BaseEntity {
     // FK to packages table
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id", nullable = false)
-    private PackageEntity package;
+    private PackageEntity packageId;
 }
