@@ -29,9 +29,11 @@ jobs:
             ${{ runner.os }}-maven
 
       - name: Build with Maven
+        working-directory: ./olx_backend
         run: mvn clean verify
 
       - name: SonarQube Scan
+        working-directory: ./olx_backend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn sonar:sonar \
