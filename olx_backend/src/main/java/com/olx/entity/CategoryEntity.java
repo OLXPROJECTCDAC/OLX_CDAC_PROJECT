@@ -2,6 +2,7 @@ package com.olx.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +14,8 @@ import lombok.ToString;
 @ToString
 public class CategoryEntity extends BaseEntity {
 
-    @Column(name = "category_name", unique = true, nullable = false, length = 100)
+	@Size(max = 500, message = "Description can't exceed 500 characters")
+    @Column(name = "category_name", unique = true, nullable = false, columnDefinition = "TEXT")
     private String categoryName;
 
     @Column(name = "category_details")

@@ -20,7 +20,7 @@ public class WishlistEntity extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false)
-	private ProductEntity product;
+	private ProductsEntity product;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
