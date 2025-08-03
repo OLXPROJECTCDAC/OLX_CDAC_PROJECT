@@ -22,7 +22,7 @@ public class ProductPhotosEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    private ProductEntity product;
+    private ProductsEntity product;
 
     @Column(name = "s3_key", length = 255, nullable = false)
     private String s3Key;
