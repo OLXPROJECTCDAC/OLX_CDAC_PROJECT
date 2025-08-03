@@ -1,5 +1,6 @@
 package com.olx.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class ReportEntity extends BaseEntity {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false)
-	private ProductEntity product;
+	private ProductsEntity product;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "report_status", nullable = false)
@@ -38,4 +39,5 @@ public class ReportEntity extends BaseEntity {
 			this.resolvedAt = LocalDateTime.now();
 		}
 	}
+
 }

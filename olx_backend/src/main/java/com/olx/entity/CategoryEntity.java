@@ -2,24 +2,20 @@ package com.olx.entity;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "categories")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class CategoryEntity {
+@Getter
+@Setter
+@ToString
+public class CategoryEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Integer categoryId;
-
-    @Column(name = "category_name", length = 100, nullable = false, unique = true)
+    @Column(name = "category_name", unique = true, nullable = false, length = 100)
     private String categoryName;
 
-    @Column(name = "category_details", columnDefinition = "TEXT")
+    @Column(name = "category_details")
     private String categoryDetails;
 }
