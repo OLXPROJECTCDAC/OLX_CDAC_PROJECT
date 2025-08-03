@@ -32,7 +32,7 @@ public class UserEntity extends BaseEntity {
     // FK to product_photos table
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
-    private ProductPhoto photoId;
+    private ProductPhotosEntity photoId;
 
     @Column(name = "is_active", nullable = false, columnDefinition = "TINYINT(1) default 1")
     private boolean isActive = true;
