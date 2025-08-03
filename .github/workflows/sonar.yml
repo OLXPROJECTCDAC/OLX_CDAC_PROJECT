@@ -2,31 +2,39 @@ name: SonarQube Analysis
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  sonar:
+  sonarqube:
     name: SonarQube Scan
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
+          distribution: 'temurin'
           java-version: '21'
-          distribution: 'oracle'
 
-      - name: Cache SonarQube packages
-        uses: actions/cache@v3
+      - name: Cache Maven packages
+        uses: actions/cache@v4
         with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
 
-      - name: Build and analyze
-        working-directory: olx_backend
-        run: mvn clean verify -Dspring.profiles.active=test sonar:sonar -Dsonar.projectKey=Upcyclex -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      - name: Build with Maven
+        run: mvn clean verify
+
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar \
+            -Dsonar.projectKey=OLXPROJECTCDAC \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
