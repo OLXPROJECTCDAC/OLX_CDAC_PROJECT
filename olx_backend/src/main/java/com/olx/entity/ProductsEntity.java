@@ -1,9 +1,14 @@
 package com.olx.entity;
 
+
 import jakarta.persistence.*;
+
+
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,16 +16,23 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "products")
 @AttributeOverride(name = "id", column = @Column(name = "product_id"))
+
+
+
 @Getter
 @Setter
 @ToString
 public class ProductsEntity extends BaseEntity {
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+
+    
+
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
@@ -29,6 +41,7 @@ public class ProductsEntity extends BaseEntity {
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
+
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
@@ -43,6 +56,10 @@ public class ProductsEntity extends BaseEntity {
 
     @Column(name = "views", nullable = false)
     private int views = 0;
+
+    
+ 
+
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)

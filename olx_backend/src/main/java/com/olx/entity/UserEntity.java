@@ -1,7 +1,13 @@
 package com.olx.entity;
 
 import jakarta.persistence.*;
+
 import lombok.*;
+
+
+
+
+
 
 import java.time.LocalDateTime;
 
@@ -9,7 +15,10 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @Getter
 @Setter
+
 @RequiredArgsConstructor
+
+
 @ToString
 public class UserEntity extends BaseEntity {
 
