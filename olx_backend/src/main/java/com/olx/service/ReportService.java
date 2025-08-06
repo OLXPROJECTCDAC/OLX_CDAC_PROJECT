@@ -13,5 +13,6 @@ public interface ReportService {
 
     List<ReportResponseDTO> getReportsByStatus(ReportStatus status);
 
+
     void updateStatus(Long reportId, ReportStatus newReportStatus);
 }

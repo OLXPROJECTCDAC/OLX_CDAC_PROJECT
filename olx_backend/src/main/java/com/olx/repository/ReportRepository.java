@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ReportRepository extends JpaRepository<ReportEntity, Long> {
 
-    List<ReportEntity> findByStatus(ReportStatus status);
+    List<ReportEntity> findByReportStatus(ReportStatus reportStatus);
+
 }

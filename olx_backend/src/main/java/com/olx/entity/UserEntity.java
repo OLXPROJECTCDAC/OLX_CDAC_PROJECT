@@ -1,16 +1,15 @@
 package com.olx.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @ToString
 public class UserEntity extends BaseEntity {
 
@@ -57,6 +56,6 @@ public class UserEntity extends BaseEntity {
 
     // FK to packages table
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "package_id", nullable = false)
-    private Package packageId;
+    @JoinColumn(name = "package_id", nullable = true)
+    private PackageEntity packageId;
 }
