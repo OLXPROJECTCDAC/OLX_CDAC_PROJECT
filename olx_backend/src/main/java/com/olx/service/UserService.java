@@ -5,9 +5,13 @@ import com.olx.dto.UserRequestDTO;
 import com.olx.dto.UserRespDTO;
 import com.olx.dto.UserUpdateDTO;
 
+import java.util.List;
+
 public interface UserService {
 
-//sign up
+
+
+    //sign up
 	UserRespDTO registerUser(UserRequestDTO dto);
 
 	UserRespDTO authenticate(AuthRequestDTO dto);

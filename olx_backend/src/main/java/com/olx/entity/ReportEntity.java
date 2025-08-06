@@ -1,6 +1,7 @@
 package com.olx.entity;
 
 
+import com.olx.Enum.ReportCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,10 @@ public class ReportEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "report_status", nullable = false)
 	private ReportStatus reportStatus;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "report_category", nullable = false)
+	private ReportCategory reportCategory;
 
 	@Column(name = "complaint_text", columnDefinition = "TEXT", nullable = false)
 	private String complaintText;

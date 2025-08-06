@@ -12,6 +12,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "product_photos")
 @AttributeOverride(name = "id", column = @Column(name = "photo_id"))
@@ -24,16 +26,21 @@ public class ProductPhotosEntity extends BaseEntity {
     @JoinColumn(name = "product_id", nullable = false)
     private ProductsEntity product;
 
-    @Column(name = "s3_key", length = 255, nullable = false)
-    private String s3Key;
+    @Column(name = "public_id", length = 1024, nullable = false)
+    private String publicId;
 
-    @Column(name = "s3_url", columnDefinition = "TEXT", nullable = false)
-    private String s3Url;
+    @Column(name = "secure_url", columnDefinition = "TEXT", nullable = false)
+    private String secureUrl;
 
     @Column(name = "position", nullable = false)
     private int position;
 
     @Column(name = "is_primary", nullable = false)
-    private boolean isPrimary;
+    private boolean isPrimary = false;
 
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = false;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 }
