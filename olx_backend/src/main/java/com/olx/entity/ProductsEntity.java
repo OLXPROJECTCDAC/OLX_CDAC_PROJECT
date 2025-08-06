@@ -1,26 +1,26 @@
 package com.olx.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "products")
+@AttributeOverride(name = "id", column = @Column(name = "product_id"))
 @Getter
 @Setter
 @ToString
 public class ProductsEntity extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 
@@ -31,7 +31,18 @@ public class ProductsEntity extends BaseEntity {
     private String description;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private Double price;
+    private BigDecimal price;
+    // precision -> total number of digits that can be stored
+    // scale -> digits after the decimal point
+
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = false;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @Column(name = "views", nullable = false)
+    private int views = 0;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)

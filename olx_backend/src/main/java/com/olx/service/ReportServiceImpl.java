@@ -68,7 +68,9 @@ public class ReportServiceImpl implements ReportService {
         if (status == null) {
             reports = reportRepository.findAll();
         } else {
-            reports = reportRepository.findByStatus(status);
+            reports = reportRepository.findByReportStatus(status);
+
+
         }
 
         return reports.stream()

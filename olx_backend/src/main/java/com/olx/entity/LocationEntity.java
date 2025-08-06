@@ -2,11 +2,7 @@ package com.olx.entity;
 
 import com.olx.Enum.Area;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +11,7 @@ import lombok.ToString;
 @Table(name = "locations")
 @Getter
 @Setter
+@AttributeOverride(name = "id", column = @Column(name = "location_id"))
 @ToString
 public class LocationEntity extends BaseEntity {
 
@@ -31,9 +28,12 @@ public class LocationEntity extends BaseEntity {
     @Column(name = "pincode", nullable = false, length = 10)
     private String pincode;
 
+/*    future Scope
     @Column(name = "latitude")
     private Double latitude;
 
     @Column(name = "longitude")
     private Double longitude;
+ */
+
 }

@@ -115,11 +115,15 @@ public enum Area {
 
     private final String pincode;
 
+    // Constructor for the enum
     Area(String pincode) {
         this.pincode = pincode;
     }
 
+    // Public getter to access the pincode
     public String getPincode() {
         return pincode;
     }
+
+
 }
