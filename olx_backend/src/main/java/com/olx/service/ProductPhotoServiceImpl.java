@@ -1,6 +1,7 @@
 package com.olx.service;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.olx.dto.ProductPhotoDTO;
 import com.olx.entity.ProductPhotosEntity;
@@ -51,6 +52,16 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
         int pos = startPosition + 1;
 
         for (MultipartFile file : images) {
+            // Define transformation to apply watermark
+            Map<String, Object> uploadParams = ObjectUtils.asMap(
+                    "transformation", new Transformation()
+                            .overlay("My Brand:Untitled_design-removebg-preview_ffuqpu")  // e.g., "my_watermark"
+                            .gravity("south_east")                // position (bottom-right)
+                            .opacity(50)                          // transparency
+                            .width(0.3)                           // watermark size (30%)
+                            .crop("scale")                        // scale watermark to fit
+            );
+
             // Upload to Cloudinary
             Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
 
