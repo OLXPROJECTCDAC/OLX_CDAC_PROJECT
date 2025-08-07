@@ -19,6 +19,7 @@ import com.olx.dto.ProductSummaryDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -94,7 +95,28 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findSummaryByLocationAreaAndIsDeletedFalse(area);
     }
 
+
+    @Override
+    public List<ProductSummaryDTO> getAllProducts() {
+
+       return productRepository.findByIsDeletedFalse()
+                .stream()
+                .map(product -> {
+                    ProductSummaryDTO dto = new ProductSummaryDTO();
+                    dto.setId(product.getId());
+                    dto.setTitle(product.getTitle());
+                    dto.setPrice(product.getPrice());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
     }
+
+    @Override
+    public void deleteProductById(Long id) {
+
+    }
+}
 
 // ==============================================================================================================
 

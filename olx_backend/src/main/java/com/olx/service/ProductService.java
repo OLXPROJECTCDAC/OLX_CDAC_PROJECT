@@ -28,5 +28,8 @@ public interface ProductService {
     ProductWithoutPhotosDTO createProduct(CreateProductNoPhotosDTO dto);
 
     // ==============================================================================================================
-
+//to get all products
+    List<ProductSummaryDTO> getAllProducts();
+   // to delete a product(soft delte is there)
+    void deleteProductById(Long id);
 }
