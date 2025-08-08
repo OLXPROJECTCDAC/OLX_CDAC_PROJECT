@@ -8,6 +8,7 @@ import com.olx.entity.ReportEntity;
 import com.olx.exception.ResourceNotFoundException;
 import com.olx.repository.ProductRepository;
 import com.olx.repository.ReportRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -25,15 +26,16 @@ public class ReportServiceImpl implements ReportService {
 
     //dependency
     private final ReportRepository reportRepository;
-    private final ProductRepository productsRepository;
+    private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
 
-    // Filing report received from user for specific product ------------------------------
+
+    // =================== Filing report received from user for specific product =====================
     @Override
     public void fileReport(ReportRequestDTO reportDTO) {
 
         // Fetch product by ID or throw exception if not found
-        ProductsEntity product = productsRepository.findById(reportDTO.getProductId())
+        ProductsEntity product = productRepository.findById(reportDTO.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         // Create and populate report entity
@@ -49,7 +51,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
 
-// Getting all the reports   ------------------------------------------------------------
+    // =========================== Getting all the reports ===================================
     @Override
     public List<ReportResponseDTO> getAllReports() {
         return reportRepository.findAll()
@@ -60,7 +62,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
 
-// Getting reports by Status   ------------------------------------------------------------
+    // =========================== Getting reports by Status ===================================
     @Override
     public List<ReportResponseDTO> getReportsByStatus(ReportStatus status) {
 
@@ -73,14 +75,21 @@ public class ReportServiceImpl implements ReportService {
 
         }
 
-        return reports.stream()
-                .map(report -> modelMapper.map(report, ReportResponseDTO.class))
-                .collect(Collectors.toList());
+//        return reports.stream()
+//                .map(report -> modelMapper.map(report, ReportResponseDTO.class))
+//                .collect(Collectors.toList());
+        return reportRepository.findAll().stream()
+                .map(report -> {
+                    ReportResponseDTO dto = modelMapper.map(report, ReportResponseDTO.class);
+                    dto.setProductId(report.getProduct().getId());
+                    return dto;
+                })
+                .toList();
     }
 
-// Marking reports as resolved ------------------------------------------------------------
+    // =========================== Marking reports as resolved ===================================
     @Override
-    public void updateStatus(Long reportId, ReportStatus newReportStatus) {
+    public ReportResponseDTO updateStatus(Long reportId, ReportStatus newReportStatus) {
 // Fetch the report by ID or throw an exception if not found
         ReportEntity report = reportRepository.findById(reportId)
                 .orElseThrow(() -> new ResourceNotFoundException("Report not Found"));
@@ -89,14 +98,15 @@ public class ReportServiceImpl implements ReportService {
 
         if (newReportStatus == ReportStatus.RESOLVED) {
             report.setIsResolved(true);
-            report.setResolvedAt(LocalDateTime.now());
-            ;
+//            report.setResolvedAt(LocalDateTime.now());
+
         } else {
             report.setIsResolved(false);
-            report.setResolvedAt(null);
+//            report.setResolvedAt(null);
         }
         reportRepository.save(report);
 
+        return modelMapper.map(report, ReportResponseDTO.class);
     }
 
 

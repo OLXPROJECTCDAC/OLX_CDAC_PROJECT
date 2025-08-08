@@ -26,19 +26,6 @@ public class AdminUserController {
     private final UserService userService;
     private final ProductService productService;
 
-/* ---------------------------------------------------------------------------------------------
-     Fetch All Users
-     URL - http://host:port/admin/users
-     Method - GET
-     Params / Payload - none
-     Response - List<UserRespDTO>
- */
-//    @GetMapping
-//    public ResponseEntity<List<UserRespDTO>> getUsers() {
-//        List<UserRespDTO> users; // = UserService.getAllUsers()
-//
-//        return ResponseEntity.ok(users);
-//    }
 
 
 }

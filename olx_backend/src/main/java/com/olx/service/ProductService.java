@@ -1,31 +1,36 @@
 package com.olx.service;
 
-import com.cloudinary.Cloudinary;
+
 import com.olx.Enum.Area;
-import com.olx.dto.CreateProductNoPhotosDTO;
-import com.olx.dto.ProductSummaryDTO;
-import com.olx.dto.ProductWithoutPhotosDTO;
-import com.olx.repository.ProductPhotosRepository;
-import com.olx.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.olx.dto.*;
+
 
 import java.util.List;
 
 
-@Transactional
-
 public interface ProductService {
 
 
-
-
-//    List<ProductSummaryDTO> getProductSummariesByArea(Area area);
+    //    List<ProductSummaryDTO> getProductSummariesByArea(Area area);
     List<ProductSummaryDTO> findSummaryByLocationAreaAndIsDeletedFalse(Area area);
 
+    List<ProductSummaryDTO>  findSummaryByUserIdAndIsDeletedFalse(Long userId);
+
     ProductWithoutPhotosDTO createProduct(CreateProductNoPhotosDTO dto);
+
+    ProductViewDTO getProductViewById(Long productId);
+
+    List<ProductSummaryDTO> searchProducts(Area area, String keyword);
+
+    void deleteProductAsUser(Long productId);
+
+    ProductSellerContactDTO getSellerContact(Long productId);
+
+    ProductWithoutPhotosDTO updateProduct(Long productId, ProductUpdateWithoutPhotosDTO productUpdateDTO);
+
+    ProductWithPhotosDTO getProductWithPhotos(Long productId);
+
+
 
     // ==============================================================================================================
 

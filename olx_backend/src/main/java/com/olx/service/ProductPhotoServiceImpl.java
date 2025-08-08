@@ -9,6 +9,7 @@ import com.olx.entity.ProductsEntity;
 import com.olx.exception.ResourceNotFoundException;
 import com.olx.repository.ProductPhotosRepository;
 import com.olx.repository.ProductRepository;
+import jakarta.persistence.Column;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
         ProductsEntity product = productRepository.findById(productId).
                 orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
 
-        List<ProductPhotosEntity> existingPhotos = photoRepository.findByProductId(productId);
+        List<ProductPhotosEntity> existingPhotos = photoRepository.findByProductIdAndIsDeletedFalse(productId);
 
         int startPosition = existingPhotos.stream()
                 //  Use map() to convert each ProductPhotosEntity into an Integer representing its position
@@ -63,7 +65,7 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
             );
 
             // Upload to Cloudinary
-            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), uploadParams);
 
             ProductPhotosEntity photo = new ProductPhotosEntity();
             photo.setProduct(product);
@@ -84,7 +86,7 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
         .collect(java.util.stream.Collectors.toList());
     }
 
-    // ==========================================================================================================
+// ==========================================================================================================
 
     @Override
     public List<ProductPhotoDTO> getPhotosForProduct(Long productId) {
@@ -94,29 +96,34 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
                 .toList();
     }
 
-    // ==========================================================================================================
+// ==========================================================================================================
 
     @Override
-    public void deletePhoto(Long productId, Long photoId) {
-        ProductPhotosEntity photo = photoRepository.findById(photoId)
+    public void softDeletePhoto(Long productId, Long photoId) {
+        // Find the photo by its ID or throw an exception if it doesn't exist.
+        ProductPhotosEntity existingPhoto = photoRepository.findById(photoId)
                 .orElseThrow(() -> new ResourceNotFoundException("Photo not found with id: " + photoId));
 
-        if (!photo.getProduct().getId().equals(productId)) {
+        // Security Check: Ensure the photo belongs to the correct product.
+        if (!existingPhoto.getProduct().getId().equals(productId)) {
             throw new IllegalArgumentException("Photo does not belong to product with id: " + productId);
         }
 
-        // Delete from Cloudinary
-        try {
-            cloudinary.uploader().destroy(photo.getPublicId(), ObjectUtils.emptyMap());
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to delete photo from Cloudinary", e);
-        }
+        // Mark the photo as deleted and set the timestamp.
+        existingPhoto.setDeleted(true); // Corrected from isDeleted(true)
+        existingPhoto.setDeletedAt(LocalDateTime.now());
 
-        photoRepository.delete(photo); // Delete from DB
+        // Delete from Cloudinary -- not needed
+//        try {
+//            cloudinary.uploader().destroy(photo.getPublicId(), ObjectUtils.emptyMap());
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to delete photo from Cloudinary", e);
+//        }
 
+
+        // Save the changes to the database (this performs an UPDATE, not a DELETE).
+        photoRepository.save(existingPhoto);
     }
-
-    // ==========================================================================================================
 
     private ProductPhotoDTO mapToDTO(ProductPhotosEntity photosEntity) {
         ProductPhotoDTO dto = new ProductPhotoDTO();
@@ -129,4 +136,5 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
         dto.setDeletedAt(photosEntity.getDeletedAt());
         return dto;
     }
+// ==========================================================================================================
 }
