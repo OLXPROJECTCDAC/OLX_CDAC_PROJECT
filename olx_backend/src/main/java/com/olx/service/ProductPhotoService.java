@@ -12,5 +12,5 @@ public interface ProductPhotoService {
 
     List<ProductPhotoDTO> getPhotosForProduct (Long productId);
 
-    void deletePhoto (Long productId, Long photoId);
+    void softDeletePhoto(Long productId, Long photoId);
 }

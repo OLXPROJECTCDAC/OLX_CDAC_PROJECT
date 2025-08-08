@@ -54,8 +54,9 @@ public class ProductsEntity extends BaseEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @Column(name = "views", nullable = false)
-    private int views = 0;
+    // Future Scope
+//    @Column(name = "views", nullable = false)
+//    private int views = 0;
 
     
  

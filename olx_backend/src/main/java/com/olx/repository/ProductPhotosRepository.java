@@ -12,5 +12,7 @@ public interface ProductPhotosRepository extends JpaRepository<ProductPhotosEnti
     List<ProductPhotosEntity> findByProductIdOrderByPositionAsc(Long productId);
 
     // Find by productId without order if needed
-    List<ProductPhotosEntity> findByProductId (Long productId);
+    List<ProductPhotosEntity> findByProductIdAndIsDeletedFalse (Long productId);
+
+
 }
