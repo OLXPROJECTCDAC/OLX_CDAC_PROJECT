@@ -29,6 +29,242 @@
 // export default SlideBar;
 
 
+// import {
+//   Box,
+//   Text,
+//   VStack,
+//   Link,
+//   Accordion,
+//   AccordionItem,
+//   AccordionButton,
+//   AccordionPanel,
+//   AccordionIcon,
+// } from "@chakra-ui/react";
+// import { Link as RouterLink } from "react-router-dom";
+// import profilePic from "../assets/profilepic.jpg";
+
+// // Helper for consistent icon + text alignment
+// const menuItem = (icon, label) => (
+//   <Box display="flex" alignItems="center" gap={3}>
+//     <Box
+//       fontSize="20px" // uniform icon size
+//       w="28px"
+//       h="28px"
+//       display="flex"
+//       alignItems="center"
+//       justifyContent="center"
+//       lineHeight="1"
+//     >
+//       <span style={{ fontSize: "20px" }}>{icon}</span>
+//     </Box>
+//     <Text
+//       mb="0"
+//       fontSize="md"
+//       fontWeight="medium"
+//       display="flex"
+//       alignItems="center"
+//     >
+//       {label}
+//     </Text>
+//   </Box>
+// );
+
+// const SlideBar = () => {
+//   return (
+//     <Box
+//       display="flex"
+//       width="250px"
+//       backgroundColor="#1A202C"
+//       color="white"
+//       flexDirection="column"
+//       height="100vh"
+//       padding="1.5rem"
+//       boxShadow="xl"
+//     >
+//       {/* Profile */}
+//       <Box display="flex" flexDirection="column" alignItems="center" mb={6}>
+//         <img
+//           src={profilePic}
+//           alt="profile pic"
+//           style={{ borderRadius: "50%", width: "90px", height: "90px" }}
+//         />
+//         <Text fontSize="lg" fontWeight="bold" mt={3}>
+//           Your Name
+//         </Text>
+//       </Box>
+
+//       {/* Navigation */}
+//       <VStack spacing={4} align="stretch" flex="1">
+//         {/* Categories */}
+//         <Accordion allowToggle>
+//           <AccordionItem border="none">
+//             <h2>
+//               <AccordionButton
+//                 _hover={{ bg: "gray.600" }}
+//                 display="flex"
+//                 alignItems="center"
+//                 py={2}
+//               >
+//                 <Box flex="1">{menuItem("🏷️", "Categories")}</Box>
+//                 <AccordionIcon />
+//               </AccordionButton>
+//             </h2>
+//             <AccordionPanel pb={2}>
+//               <VStack align="start" spacing={2} pl={6}>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/categories/list"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📋 List
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/categories/analytics"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📊 Analytics
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/categories/search"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   🔍 Search
+//                 </Link>
+//               </VStack>
+//             </AccordionPanel>
+//           </AccordionItem>
+//         </Accordion>
+
+//         {/* Products */}
+//         <Accordion allowToggle>
+//           <AccordionItem border="none">
+//             <h2>
+//               <AccordionButton
+//                 _hover={{ bg: "gray.600" }}
+//                 display="flex"
+//                 alignItems="center"
+//                 py={2}
+//               >
+//                 <Box flex="1">{menuItem("📦", "Products")}</Box>
+//                 <AccordionIcon />
+//               </AccordionButton>
+//             </h2>
+//             <AccordionPanel pb={2}>
+//               <VStack align="start" spacing={2} pl={6}>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/products/list"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📋 List
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/products/analytics"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📊 Analytics
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/products/search"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   🔍 Search
+//                 </Link>
+//               </VStack>
+//             </AccordionPanel>
+//           </AccordionItem>
+//         </Accordion>
+
+//         {/* Users (NEW) */}
+//         <Accordion allowToggle>
+//           <AccordionItem border="none">
+//             <h2>
+//               <AccordionButton
+//                 _hover={{ bg: "gray.600" }}
+//                 display="flex"
+//                 alignItems="center"
+//                 py={2}
+//               >
+//                 <Box flex="1">{menuItem("👥", "Users")}</Box>
+//                 <AccordionIcon />
+//               </AccordionButton>
+//             </h2>
+//             <AccordionPanel pb={2}>
+//               <VStack align="start" spacing={2} pl={6}>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/users/list"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📋 List
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/users/analytics"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📊 Analytics
+//                 </Link>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/users/search"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   🔍 Search
+//                 </Link>
+//               </VStack>
+//             </AccordionPanel>
+//           </AccordionItem>
+//         </Accordion>
+
+//         {/* Settings */}
+//         <Accordion allowToggle>
+//           <AccordionItem border="none">
+//             <h2>
+//               <AccordionButton
+//                 _hover={{ bg: "gray.600" }}
+//                 display="flex"
+//                 alignItems="center"
+//                 py={2}
+//               >
+//                 <Box flex="1">{menuItem("⚙️", "Settings")}</Box>
+//                 <AccordionIcon />
+//               </AccordionButton>
+//             </h2>
+//             <AccordionPanel pb={2}>
+//               <VStack align="start" spacing={2} pl={6}>
+//                 <Link
+//                   as={RouterLink}
+//                   to="/AdminPanel/settings/edit-profile"
+//                   _hover={{ color: "teal.300" }}
+//                 >
+//                   📝 Edit Profile
+//                 </Link>
+//                 <Link as={RouterLink} to="/" _hover={{ color: "teal.300" }}>
+//                   🔧 Logout
+//                 </Link>
+//               </VStack>
+//             </AccordionPanel>
+//           </AccordionItem>
+//         </Accordion>
+//       </VStack>
+
+//       {/* Footer */}
+//       <Box mt="auto" pt="10" textAlign="center">
+//         <Text fontSize="sm" color="gray.400">
+//           © 2025 YourCompany
+//         </Text>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default SlideBar;
+
 import {
   Box,
   Text,
@@ -47,7 +283,7 @@ import profilePic from "../assets/profilepic.jpg";
 const menuItem = (icon, label) => (
   <Box display="flex" alignItems="center" gap={3}>
     <Box
-      fontSize="20px" // uniform icon size
+      fontSize="20px"
       w="28px"
       h="28px"
       display="flex"
@@ -57,13 +293,7 @@ const menuItem = (icon, label) => (
     >
       <span style={{ fontSize: "20px" }}>{icon}</span>
     </Box>
-    <Text
-      mb= "0"
-      fontSize="md"
-      fontWeight="medium"
-      display="flex"
-      alignItems="center"
-    >
+    <Text mb="0" fontSize="md" fontWeight="medium" display="flex" alignItems="center">
       {label}
     </Text>
   </Box>
@@ -94,28 +324,25 @@ const SlideBar = () => {
       </Box>
 
       {/* Navigation */}
-      <VStack spacing={4} align="stretch" flex="1">
+      <VStack
+        spacing={4}
+        align="stretch"
+        flex="1"
+        overflowY="auto"
+        pr={1}
+      >
         {/* Categories */}
-        <Accordion allowToggle>
+        <Accordion allowMultiple>
           <AccordionItem border="none">
             <h2>
-              <AccordionButton
-                _hover={{ bg: "gray.600" }}
-                display="flex"
-                alignItems="center"
-                py={2}
-              >
+              <AccordionButton _hover={{ bg: "gray.600" }} display="flex" alignItems="center" py={2}>
                 <Box flex="1">{menuItem("🏷️", "Categories")}</Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={2}>
               <VStack align="start" spacing={2} pl={6}>
-                <Link
-                  as={RouterLink}
-                  to="/AdminPanel/categories/list"
-                  _hover={{ color: "teal.300" }}
-                >
+                <Link as={RouterLink} to="/AdminPanel/categories/list" _hover={{ color: "teal.300" }}>
                   📋 List
                 </Link>
                 <Link
@@ -125,39 +352,23 @@ const SlideBar = () => {
                 >
                   📊 Analytics
                 </Link>
-                <Link
-                  as={RouterLink}
-                  to="/AdminPanel/categories/search"
-                  _hover={{ color: "teal.300" }}
-                >
-                  🔍 Search
-                </Link>
               </VStack>
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
 
         {/* Products */}
-        <Accordion allowToggle>
+        <Accordion allowMultiple>
           <AccordionItem border="none">
             <h2>
-              <AccordionButton
-                _hover={{ bg: "gray.600" }}
-                display="flex"
-                alignItems="center"
-                py={2}
-              >
+              <AccordionButton _hover={{ bg: "gray.600" }} display="flex" alignItems="center" py={2}>
                 <Box flex="1">{menuItem("📦", "Products")}</Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={2}>
               <VStack align="start" spacing={2} pl={6}>
-                <Link
-                  as={RouterLink}
-                  to="/AdminPanel/products/list"
-                  _hover={{ color: "teal.300" }}
-                >
+                <Link as={RouterLink} to="/AdminPanel/products/list" _hover={{ color: "teal.300" }}>
                   📋 List
                 </Link>
                 <Link
@@ -167,12 +378,53 @@ const SlideBar = () => {
                 >
                   📊 Analytics
                 </Link>
+              </VStack>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+
+        {/* Users */}
+        <Accordion allowMultiple>
+          <AccordionItem border="none">
+            <h2>
+              <AccordionButton _hover={{ bg: "gray.600" }} display="flex" alignItems="center" py={2}>
+                <Box flex="1">{menuItem("👥", "Users")}</Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={2}>
+              <VStack align="start" spacing={2} pl={6}>
+                <Link as={RouterLink} to="/AdminPanel/users/list" _hover={{ color: "teal.300" }}>
+                  📋 List
+                </Link>
+                <Link as={RouterLink} to="/AdminPanel/users/analytics" _hover={{ color: "teal.300" }}>
+                  📊 Analytics
+                </Link>
+              </VStack>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+
+        {/* Complaints */}
+        <Accordion allowMultiple>
+          <AccordionItem border="none">
+            <h2>
+              <AccordionButton _hover={{ bg: "gray.600" }} display="flex" alignItems="center" py={2}>
+                <Box flex="1">{menuItem("📢", "Complaints")}</Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={2}>
+              <VStack align="start" spacing={2} pl={6}>
+                <Link as={RouterLink} to="/AdminPanel/reports/all" _hover={{ color: "teal.300" }}>
+                  📋 List
+                </Link>
                 <Link
                   as={RouterLink}
-                  to="/AdminPanel/products/search"
+                  to="/AdminPanel/complaints/analytics"
                   _hover={{ color: "teal.300" }}
                 >
-                  🔍 Search
+                  📊 Analytics
                 </Link>
               </VStack>
             </AccordionPanel>
@@ -180,34 +432,21 @@ const SlideBar = () => {
         </Accordion>
 
         {/* Settings */}
-        <Accordion allowToggle>
+        <Accordion allowMultiple>
           <AccordionItem border="none">
             <h2>
-              <AccordionButton
-                _hover={{ bg: "gray.600" }}
-                display="flex"
-                alignItems="center"
-                py={2}
-              >
-                <Box flex="1" >{menuItem("⚙️", "Settings")}</Box>
+              <AccordionButton _hover={{ bg: "gray.600" }} display="flex" alignItems="center" py={2}>
+                <Box flex="1">{menuItem("⚙️", "Settings")}</Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={2}>
               <VStack align="start" spacing={2} pl={6}>
-                <Link
-                  as={RouterLink}
-                  to="/AdminPanel/settings/edit-profile"
-                  _hover={{ color: "teal.300" }}
-                >
+                <Link as={RouterLink} to="/AdminPanel/settings/edit-profile" _hover={{ color: "teal.300" }}>
                   📝 Edit Profile
                 </Link>
-                <Link
-                  as={RouterLink}
-                  to="/AdminPanel/settings/preferences"
-                  _hover={{ color: "teal.300" }}
-                >
-                  🔧 Preferences
+                <Link as={RouterLink} to="/" _hover={{ color: "teal.300" }}>
+                  🔧 Logout
                 </Link>
               </VStack>
             </AccordionPanel>
@@ -218,7 +457,7 @@ const SlideBar = () => {
       {/* Footer */}
       <Box mt="auto" pt="10" textAlign="center">
         <Text fontSize="sm" color="gray.400">
-          © 2025 YourCompany
+          © 2025 Upcyclex
         </Text>
       </Box>
     </Box>
@@ -226,3 +465,4 @@ const SlideBar = () => {
 };
 
 export default SlideBar;
+
