@@ -10,7 +10,6 @@ import { ChakraProvider, } from '@chakra-ui/react'
 
 import AdminPanel from './pages/AdminPanel.jsx'
 import AdminPanelCategories from './pages/AdminPanelCategories.jsx'
-import AdminPanelOrders from './pages/AdminPanelOrders.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import Signup from './pages/SignUpPage';
 import UpdateUser from './pages/UpdateUser.jsx'
@@ -20,6 +19,11 @@ import AdminPanelSearchProduct from './pages/AdminPanelSearchProduct.jsx'
 import AdminPanelProductList from './pages/AdminPanelProductsList.jsx'
 import AdminPanelCategoriesAnalytics from './pages/AdminPanelCategoriesAnalytics.jsx'
 import AdminPanelProductsAnalytics from './pages/AdminPanelProductsAnalytics.jsx'
+import AdminPanelCategoriesList from './pages/AdminPanelCategoriesList.jsx'
+import AdminPanelComplaintsAnalytics from './pages/AdminPanelComplanitsAnalytics.jsx'
+import AdminPanelUserAnalytics from './pages/AdminPanelUsersAnalytics.jsx'
+import AdminPanelUsersList from './pages/AdminPanelUsersList.jsx'
+import AdminPanelComplaintsList from './pages/AdminPanelComplaintsList.jsx'
 
 
 
@@ -34,12 +38,18 @@ createRoot(document.getElementById('root')).render(
         
         <Route path="/AdminPanel" element={<AdminPanel/>} />
         <Route path="/AdminPanel/categories" element={<AdminPanelCategories/>}/>
-        <Route path="/AdminPanel/orders" element = {<AdminPanelOrders/>}></Route>
+
+      
         <Route path="/AdminPanel/Products" element={<AdminPanelProducts/>}/>
         <Route path="/AdminPanel/products/list" element={<AdminPanelProductList/>}/>
         <Route path="/AdminPanel/categories/analytics" element={<AdminPanelCategoriesAnalytics/>}></Route>
+        <Route path="/AdminPanel/categories/list" element={<AdminPanelCategoriesList/>}></Route>
         <Route path="/AdminPanel/products/analytics" element={<AdminPanelProductsAnalytics/>}></Route>
         <Route path="/AdminPanel/SearchProduct" element={<AdminPanelSearchProduct/>}/>
+        <Route path="/AdminPanel/complaints/analytics" element={<AdminPanelComplaintsAnalytics/>}></Route>
+        <Route path="/AdminPanel/users/analytics" element={<AdminPanelUserAnalytics/>}></Route>
+        <Route path="/AdminPanel/users/list" element={<AdminPanelUsersList/>}></Route>
+        <Route path="/AdminPanel/reports/all" element={<AdminPanelComplaintsList/>}></Route>
        
         
         <Route path="/login" element ={<LoginPage/>}/>

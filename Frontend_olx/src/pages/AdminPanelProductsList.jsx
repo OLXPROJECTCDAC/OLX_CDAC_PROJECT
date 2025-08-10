@@ -252,5 +252,3 @@ const handleSaveUpdate = async () => {
 };
 
 export default ProductsTable;
-
-
