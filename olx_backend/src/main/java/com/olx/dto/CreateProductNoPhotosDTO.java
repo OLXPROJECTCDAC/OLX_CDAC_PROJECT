@@ -36,4 +36,10 @@ public class CreateProductNoPhotosDTO extends BaseDTO{
 
     @NotNull(message = "Area is required")
     private Area area;
+
+//    @NotBlank(message = "City cannot be empty.")
+//    private String city;
+//
+//    @NotBlank(message = "State cannot be empty.")
+//    private String state;
 }

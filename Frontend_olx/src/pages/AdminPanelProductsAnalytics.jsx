@@ -37,6 +37,7 @@ import {
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import { useToast } from "@chakra-ui/react";
+import SideBar from "../components/SideBar"
 
 // Register Chart.js components. This is crucial for rendering the different chart types.
 ChartJS.register(
@@ -51,18 +52,7 @@ ChartJS.register(
   ArcElement
 );
 
-// Placeholder for a SideBar component. This is here to make the code self-contained.
-// You should use your actual SideBar component if it's a separate file.
-const SideBar = () => (
-    <Box w="250px" bg="gray.800" minH="100vh" p={4} color="white">
-        <Heading size="md" mb={6}>Admin Panel</Heading>
-        <VStack align="stretch" spacing={2}>
-            <Button variant="ghost" justifyContent="flex-start" colorScheme="gray">Dashboard</Button>
-            <Button variant="ghost" justifyContent="flex-start" colorScheme="gray">Listings</Button>
-            <Button variant="ghost" justifyContent="flex-start" colorScheme="gray">Analytics</Button>
-        </VStack>
-    </Box>
-);
+
 
 // Main component for the OLX Admin Analytics Dashboard
 function AdminPanelProductsAnalytics() {
@@ -286,9 +276,10 @@ function AdminPanelProductsAnalytics() {
     <>
       <Box display="flex" minH="100vh">
         <SideBar />
+        
 
         <Box flex="1" p={8} bg="gray.50">
-          <Heading as="h1" size="xl" mb={6}>OLX Admin Analytics Dashboard</Heading>
+          <Heading as="h1" size="xl" mb={6} align="center"> Products Analytic Dashboard</Heading>
 
           <SimpleGrid spacing={6} templateColumns="repeat(auto-fill, minmax(300px, 1fr))">
             {/* Card for Average Listing Price - Clicks to show Line Chart */}

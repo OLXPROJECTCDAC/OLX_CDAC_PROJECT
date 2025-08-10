@@ -1,7 +1,6 @@
 package com.olx.dto;
 import com.olx.Enum.Area;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,6 +8,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductWithPhotosDTO extends BaseDTO{
     private String title;
     private String description;

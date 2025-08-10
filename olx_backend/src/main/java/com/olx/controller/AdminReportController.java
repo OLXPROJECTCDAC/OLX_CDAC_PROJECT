@@ -6,8 +6,10 @@ import com.olx.dto.ReportStatusUpdateDTO;
 import com.olx.service.ProductService;
 import com.olx.service.ReportService;
 import com.olx.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @RequestMapping("/admin/reports")
 @AllArgsConstructor
 @Validated
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminReportController {
 
     //dependency
@@ -33,6 +36,7 @@ public class AdminReportController {
      Response - List<ReportResponseDTO>
  */
 @GetMapping
+
 public ResponseEntity<List<ReportResponseDTO>> getReports(
         @RequestParam(value = "status", required = false) ReportStatus status) {
 // @RequestParam --> Expect a query parameter from the HTTP request URL, which is optional, w/ value as status
@@ -60,11 +64,13 @@ public ResponseEntity<List<ReportResponseDTO>> getReports(
      Response - String / ReportResponseDTO
  */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateReportStatus(
-            @PathVariable Long id, @RequestBody ReportStatusUpdateDTO dto) {
-        reportService.updateStatus(id, dto.getReportStatus());
 
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> updateReportStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody ReportStatusUpdateDTO dto) {
+        ReportResponseDTO updatedStatus =reportService.updateStatus(id, dto.getReportStatus());
+
+        return ResponseEntity.ok(updatedStatus);
     }
 
 }

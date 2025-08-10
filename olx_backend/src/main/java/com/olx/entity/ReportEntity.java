@@ -37,7 +37,7 @@ public class ReportEntity extends BaseEntity {
 	@Column(name = "resolved_at")
 	private LocalDateTime resolvedAt;
 
-// todo: Auto-setting resolvedAt when isResolved becomes true
+
 	public void setIsResolved(boolean resolved) {
 		this.isResolved = resolved;
 		if (resolved && this.resolvedAt == null) {

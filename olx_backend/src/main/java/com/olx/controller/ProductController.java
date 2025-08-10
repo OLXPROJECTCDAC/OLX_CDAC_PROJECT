@@ -5,6 +5,7 @@ import com.olx.dto.*;
 import com.olx.service.ProductPhotoService;
 import com.olx.service.ProductService;
 import com.olx.service.ReportService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
+
 public class ProductController {
 
     //dependency
@@ -36,9 +38,9 @@ public class ProductController {
     Access level - Only User, Admin
 */
 
-    @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody CreateProductNoPhotosDTO request) {
-        try {
+    @PostMapping("/add")
+    public ResponseEntity<?> createProduct(@Valid @RequestBody CreateProductNoPhotosDTO request) {
+
             ProductWithoutPhotosDTO createdProduct  = productService.createProduct(request);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
@@ -47,48 +49,18 @@ public class ProductController {
                     "productId", createdProduct.getId()
             ));
 
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("error", e.getMessage()));
-        }
+
     }
 
     /*
-    Add images to Product
+    Add images to Product --> moved to productphotoscontroller
     URL     - POST /products/{productId}/photos
     Method  - POST
     Payload - Multipart form data (param: images)
     Response - { message, photos, count }
     Access level - Only User, Admin
 */
-    @PostMapping("/{productId}/photos")
-    public ResponseEntity<?> uploadProductPhotos(
-            @PathVariable Long productId,
-            @RequestParam("images") List<MultipartFile> images) {
 
-        try {
-            // Validate at least one photo is required
-            if (images == null || images.isEmpty()) {
-                return ResponseEntity.badRequest()
-                        .body(Map.of("error", "At least one photo is required"));
-            }
-
-            List<ProductPhotoDTO> uploadedPhotos = productPhotoService.uploadPhotos(productId, images);
-
-            return ResponseEntity.ok(Map.of(
-                    "message", "Photos uploaded successfully",
-                    "photos", uploadedPhotos,
-                    "count", uploadedPhotos.size()
-            ));
-
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("error", e.getMessage()));
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Failed to upload images"));
-        }
-    }
 
 
 // ========================== Report a Product =========================================
@@ -123,11 +95,115 @@ public class ProductController {
 
     @GetMapping("/by-area")
     public ResponseEntity<List<ProductSummaryDTO>> getProductsByArea(@RequestParam Area area) {
-        // FIX: Call the correct method from the service.
+
         List<ProductSummaryDTO> summaries = productService.findSummaryByLocationAreaAndIsDeletedFalse(area);
         return ResponseEntity.ok(summaries);
     }
 
-// ========================== xxxxxxxxxxxxxxxxxxxxxxx =========================================
+// ========================== Get Product Summary DTO by UserId =========================================
+/*
+     Get products by UserId (summary only)
+     URL     - GET /products/{userId}
+     Method  - GET
+     Params  - userId
+     Response - List of ProductSummaryDTO (id, title, price, area)
+     Access level - Open To All
+ */
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<ProductSummaryDTO>> getProductsBySeller(@PathVariable Long userId) {
+
+        List<ProductSummaryDTO> listedProducts = productService.findSummaryByUserIdAndIsDeletedFalse(userId);
+        return ResponseEntity.ok(listedProducts);
+    }
+
+// ========================== Get Product Detailed View DTO by Id =========================================
+
+    /*
+     Get product by id (summary to view on Product view)
+     URL     - GET /products/{id}
+     Method  - GET
+     Params  - product id
+     Response - ProductViewDTO (detailed object containing product info, photos, and seller details))
+     Access level - Open To All
+
+ */
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductViewDTO> getDetailedProductById(@PathVariable Long id) {
+    ProductViewDTO product = productService.getProductViewById(id);
+    return ResponseEntity.ok(product);
+}
+
+// ========================== Get Product Summary DTO by Area + Search keywords =========================================
+    /*
+         Search for products by area and keyword
+         URL     - GET /products/search?area=PUNE_CITY&keyword=study table
+         Method  - GET
+         Params  - area (Enum) + keyword (String)
+         Response - List of ProductSummaryDTO
+         Access level - Open To All
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductSummaryDTO>> searchProducts(
+            @RequestParam("area") Area area,
+            @RequestParam(value = "keyword", required = false) String keyword) {
+
+        List<ProductSummaryDTO> products = productService.searchProducts(area, keyword);
+        return ResponseEntity.ok(products);
+    }
+
+// ========================== Delete product listing =========================================
+    /*
+         Delete product listing
+         URL     - DELETE /products/delete/{id}
+         Method  - DELETE
+         Params  - product id
+         Response - Confirmation message
+         Access level - Logged In User
+     */
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProductListingAsUser(@PathVariable Long id){
+        productService.deleteProductAsUser(id);
+        return ResponseEntity.ok("Product Deleted Successfully!");
+    }
+
+// ========================== Get Seller's contact number =========================================
+
+    /*
+     Get seller's contact number for a specific product
+     URL     - GET /products/{id}/seller-contact
+     Method  - GET
+     Params  - productid
+     Response - ProductSellerContactDTO
+     Access level - Authenticated Users Only
+ */
+    @GetMapping("/{id}/seller-contact")
+    public ResponseEntity<ProductSellerContactDTO> getSellerContact(@PathVariable Long id) {
+        ProductSellerContactDTO contact = productService.getSellerContact(id);
+        return ResponseEntity.ok(contact);
+    }
+// ========================== Edit a product listing =========================================
+
+    /*
+       Edit a product listing
+       URL     - PUT /products/{productId}
+       Method  - PUT
+       Payload - JSON body (UpdateProductDTO)
+       Response - The updated ProductWithoutPhotosDTO
+       Access level - Logged-in User (Seller) or Admin
+   */
+    @PutMapping("/{productId}")
+    public ResponseEntity<ProductWithoutPhotosDTO> editProductWithoutPhotos(
+            @PathVariable Long productId,
+            @Valid @RequestBody ProductUpdateWithoutPhotosDTO productUpdateDTO) {
+
+        // ADD a security check here to ensure the logged-in user owns this product.
+
+        ProductWithoutPhotosDTO updatedProduct = productService.updateProduct(productId, productUpdateDTO);
+        return ResponseEntity.ok(updatedProduct);
+    }
 
 }
+
+
