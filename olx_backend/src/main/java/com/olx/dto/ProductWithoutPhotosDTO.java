@@ -25,8 +25,4 @@ public class ProductWithoutPhotosDTO extends BaseDTO{
     private boolean isDeleted;
     private LocalDateTime deletedAt;
     private int views;
-
-
-
-
 }

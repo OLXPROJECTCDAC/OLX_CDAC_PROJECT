@@ -2,23 +2,13 @@ package com.olx.entity;
 
 import com.olx.Enum.Area;
 
-
 import jakarta.persistence.*;
-
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "locations",
-
-indexes = {
-        
-        @Index(name = "idx_locations_area", columnList = "area"),
-       
-    }
-		)
+@Table(name = "locations")
 @Getter
 @Setter
 @AttributeOverride(name = "id", column = @Column(name = "location_id"))
@@ -38,14 +28,10 @@ public class LocationEntity extends BaseEntity {
     @Column(name = "pincode", nullable = false, length = 10)
     private String pincode;
 
-
 /*    future Scope
-
-   
     @Column(name = "latitude")
     private Double latitude;
 
-    
     @Column(name = "longitude")
     private Double longitude;
  */

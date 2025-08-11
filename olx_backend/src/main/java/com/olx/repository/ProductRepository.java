@@ -49,7 +49,7 @@ public interface ProductRepository extends JpaRepository<ProductsEntity, Long> {
         p.title,
         p.price,
         p.description,
-        p.location.area,  // Corrected line
+        p.location.area,  
         u.firstName,
         u.lastName,
         u.createdAt,

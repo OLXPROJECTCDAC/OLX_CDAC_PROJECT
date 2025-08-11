@@ -38,18 +38,18 @@ public class ProductController {
     Access level - Only User, Admin
 */
 
-    @PostMapping("/add")
-    public ResponseEntity<?> createProduct(@Valid @RequestBody CreateProductNoPhotosDTO request) {
+    @PostMapping(value = "/add", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> createProductWithPhotos(
+            @Valid @RequestPart("productData") CreateProductNoPhotosDTO request,
+            @RequestPart("images") List<MultipartFile> images) throws IOException {
 
-            ProductWithoutPhotosDTO createdProduct  = productService.createProduct(request);
+        ProductWithoutPhotosDTO createdProduct = productService.createProduct(request, images);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-                    "message", "Product created successfully",
-                    "product", createdProduct,
-                    "productId", createdProduct.getId()
-            ));
-
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
+                "message", "Product created successfully",
+                "product", createdProduct,
+                "productId", createdProduct.getId()
+        ));
     }
 
     /*
@@ -103,14 +103,14 @@ public class ProductController {
 // ========================== Get Product Summary DTO by UserId =========================================
 /*
      Get products by UserId (summary only)
-     URL     - GET /products/{userId}
+     URL     - GET @GetMapping("/by-user/{userId}")
      Method  - GET
      Params  - userId
      Response - List of ProductSummaryDTO (id, title, price, area)
      Access level - Open To All
  */
 
-    @GetMapping("/{userId}")
+    @GetMapping("/by-user/{userId}")
     public ResponseEntity<List<ProductSummaryDTO>> getProductsBySeller(@PathVariable Long userId) {
 
         List<ProductSummaryDTO> listedProducts = productService.findSummaryByUserIdAndIsDeletedFalse(userId);
@@ -128,7 +128,7 @@ public class ProductController {
      Access level - Open To All
 
  */
-    @GetMapping("/{id}")
+    @GetMapping("/view/{id}")
     public ResponseEntity<ProductViewDTO> getDetailedProductById(@PathVariable Long id) {
     ProductViewDTO product = productService.getProductViewById(id);
     return ResponseEntity.ok(product);
@@ -202,6 +202,13 @@ public class ProductController {
 
         ProductWithoutPhotosDTO updatedProduct = productService.updateProduct(productId, productUpdateDTO);
         return ResponseEntity.ok(updatedProduct);
+    }
+
+    // ========================== Get Product with Photos for Editing ========================================
+    @GetMapping("/{productId}/edit-details")
+    public ResponseEntity<ProductWithPhotosDTO> getProductForEdit(@PathVariable Long productId) {
+        ProductWithPhotosDTO productWithPhotos = productService.getProductWithPhotos(productId);
+        return ResponseEntity.ok(productWithPhotos);
     }
 
 }

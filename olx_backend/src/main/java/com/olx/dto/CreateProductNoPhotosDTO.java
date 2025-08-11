@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CreateProductNoPhotosDTO extends BaseDTO{
+public class    CreateProductNoPhotosDTO extends BaseDTO{
     @NotNull(message = "User ID is required")
     private Long userId;
 

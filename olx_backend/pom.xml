@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -27,13 +26,9 @@
         <tag/>
         <url/>
     </scm>
-
     <properties>
         <java.version>21</java.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
     </properties>
-
     <dependencies>
         <!-- Spring Data JPA for integrating Spring Boot with JPA and Hibernate for database access -->
         <dependency>
@@ -177,19 +172,4 @@
             </plugin>
         </plugins>
     </build>
-
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-
 </project>

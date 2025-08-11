@@ -3,8 +3,9 @@ export function decodeJwt(token = "") {
     try {
         const [, payload] = token.split(".");
         if (!payload) return null;
-        const json = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
-        return json || null;
+        const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+        const json = atob(base64);
+        return JSON.parse(json) || null;
     } catch {
         return null;
     }
@@ -20,3 +21,4 @@ export function isJwtExpired(token = "", skewMs = 5000) {
     if (!expMs) return false;
     return Date.now() + skewMs >= expMs;
 }
+

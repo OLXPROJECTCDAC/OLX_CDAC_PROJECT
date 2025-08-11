@@ -60,7 +60,7 @@ public class ProductPhotoServiceImpl implements ProductPhotoService {
                             .overlay("My Brand:Untitled_design-removebg-preview_ffuqpu")  // e.g., "my_watermark"
                             .gravity("south_east")                // position (bottom-right)
                             .opacity(50)                          // transparency
-                            .width(0.3)                           // watermark size (30%)
+                            .width(0.6)                           // watermark size (60%)
                             .crop("scale")                        // scale watermark to fit
             );
 

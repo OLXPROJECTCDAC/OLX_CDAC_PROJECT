@@ -1,5 +1,8 @@
 package com.olx.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
+import com.cloudinary.utils.ObjectUtils;
 import com.olx.Enum.Area;
 import com.olx.dto.*;
 import com.olx.entity.*;
@@ -9,9 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,26 +33,22 @@ public class ProductServiceImpl implements ProductService {
     private final LocationRepository locationRepository;
     private final ProductPhotosRepository productPhotosRepository;
     private final ModelMapper modelMapper;
-
-
+    private final Cloudinary cloudinary;
 
     @Override
-    public ProductWithoutPhotosDTO createProduct(CreateProductNoPhotosDTO dto) {
-// Get user
+    @Transactional
+    public ProductWithoutPhotosDTO createProduct(CreateProductNoPhotosDTO dto, List<MultipartFile> images) throws IOException {
+        // Step 1: Validate User and Category
         UserEntity user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-        // Get category
         CategoryEntity category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
-//  Get area, derive city/state/pincode
+        // Step 2: Handle Location
         Area selectedArea = dto.getArea();
         String city = "Pune";
         String state = "Maharashtra";
         String pincode = selectedArea.getPincode();
-
-        // 4. Get or create location
         LocationEntity location = locationRepository
                 .findByStateAndCityAndArea(state, city, selectedArea)
                 .orElseGet(() -> {
@@ -56,7 +59,8 @@ public class ProductServiceImpl implements ProductService {
                     loc.setPincode(pincode);
                     return locationRepository.save(loc);
                 });
-        // 5. Build product entity
+
+        // Step 3: Build and Save the Product Entity
         ProductsEntity product = new ProductsEntity();
         product.setTitle(dto.getTitle());
         product.setDescription(dto.getDescription());
@@ -64,16 +68,43 @@ public class ProductServiceImpl implements ProductService {
         product.setUser(user);
         product.setCategory(category);
         product.setLocation(location);
-
-        // 6. Save
         ProductsEntity savedProduct = productRepository.save(product);
 
-//        return modelMapper.map(savedProduct, ProductWithoutPhotosDTO.class);
-//        will not automatically map nested properties like user.id -> userId,
-//        category.id -> categoryId, location.area -> area.
-//        That leads to userId, categoryId, categoryName, area being null in the DTO.
+        // Step 4: Upload Photos with Watermark and Save Photo Entities
+        if (images == null || images.isEmpty() || images.stream().allMatch(MultipartFile::isEmpty)) {
+            // This exception will cause the transaction to roll back, deleting the saved product.
+            throw new IllegalArgumentException("At least one photo is required.");
+        }
 
-        // Convert to response DTO
+        List<ProductPhotosEntity> photoEntities = new ArrayList<>();
+        int position = 1; // Start position is always 1 for a new product
+        for (MultipartFile image : images) {
+            if (image != null && !image.isEmpty()) {
+                // Define transformation to apply watermark
+                Map<String, Object> uploadParams = ObjectUtils.asMap(
+                        "transformation", new Transformation()
+                                .overlay("My Brand:Untitled_design-removebg-preview_ffuqpu")
+                                .gravity("south_east")
+                                .opacity(50)
+                                .width(0.6)
+                                .crop("scale")
+                );
+
+                // Upload to Cloudinary with the transformation parameters
+                Map uploadResult = cloudinary.uploader().upload(image.getBytes(), uploadParams);
+
+                ProductPhotosEntity photo = new ProductPhotosEntity();
+                photo.setProduct(savedProduct);
+                photo.setPublicId((String) uploadResult.get("public_id"));
+                photo.setSecureUrl((String) uploadResult.get("secure_url"));
+                photo.setPosition(position++);
+                photoEntities.add(photo);
+            }
+        }
+        // Save all photo entities in a single batch operation
+        productPhotosRepository.saveAll(photoEntities);
+
+        // Step 5: Convert to DTO and return
         ProductWithoutPhotosDTO response = new ProductWithoutPhotosDTO();
         response.setId(savedProduct.getId());
         response.setTitle(savedProduct.getTitle());
@@ -82,7 +113,6 @@ public class ProductServiceImpl implements ProductService {
         response.setCategoryId(savedProduct.getCategory().getId());
         response.setCategoryName(savedProduct.getCategory().getCategoryName());
         response.setArea(savedProduct.getLocation().getArea());
-
 
         return response;
     }
@@ -94,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findSummaryByLocationAreaAndIsDeletedFalse(area);
     }
 
-// ==============================================================================================================
+    // ==============================================================================================================
     @Override
     public List<ProductSummaryDTO> findSummaryByUserIdAndIsDeletedFalse(Long userId) {
         return productRepository.findSummaryByUserIdAndIsDeletedFalse(userId);
@@ -103,33 +133,33 @@ public class ProductServiceImpl implements ProductService {
 
 // ==============================================================================================================
 
-public ProductViewDTO getProductViewById(Long productId) {
-    // 1. Fetch the main product and seller details
-    ProductViewDTO productView = productRepository.findProductViewById(productId)
-            .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+    public ProductViewDTO getProductViewById(Long productId) {
+        // 1. Fetch the main product and seller details
+        ProductViewDTO productView = productRepository.findProductViewById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
 
-    // 2. Fetch all photo URLs for the given product
-    List<ProductPhotosEntity> photos = productPhotosRepository.findByProductIdAndIsDeletedFalse(productId);
-    List<String> photoUrls = photos.stream()
-            .map(ProductPhotosEntity::getSecureUrl)
-            .collect(Collectors.toList());
+        // 2. Fetch all photo URLs for the given product
+        List<ProductPhotosEntity> photos = productPhotosRepository.findByProductIdAndIsDeletedFalse(productId);
+        List<String> photoUrls = photos.stream()
+                .map(ProductPhotosEntity::getSecureUrl)
+                .collect(Collectors.toList());
 
-    // 3. Set the photo URLs in the DTO
-    productView.setPhotoUrl(photoUrls);
+        // 3. Set the photo URLs in the DTO
+        productView.setPhotoUrl(photoUrls);
 
-    return productView;
-}
-
-
-// ==============================================================================================================
-@Override
-public List<ProductSummaryDTO> searchProducts(Area area, String keyword) {
-    if (keyword == null || keyword.trim().isEmpty()) {
-        return productRepository.findSummaryByLocationAreaAndIsDeletedFalse(area);
-        // empty keyword should return all products in area
+        return productView;
     }
-    return productRepository.searchByAreaAndKeyword(area, keyword);
-}
+
+
+    // ==============================================================================================================
+    @Override
+    public List<ProductSummaryDTO> searchProducts(Area area, String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return productRepository.findSummaryByLocationAreaAndIsDeletedFalse(area);
+            // empty keyword should return all products in area
+        }
+        return productRepository.searchByAreaAndKeyword(area, keyword);
+    }
 
 // ============================== Soft Delete a Product =====================================================
 
@@ -142,7 +172,7 @@ public List<ProductSummaryDTO> searchProducts(Area area, String keyword) {
         productRepository.softDeleteById(productId);
 
     }
-// ================================ Fetch Seller's Contact Number =======================================================
+    // ================================ Fetch Seller's Contact Number =======================================================
     @Override
     public ProductSellerContactDTO getSellerContact(Long productId) {
         // Call the new, optimized repository method directly
@@ -200,7 +230,7 @@ public List<ProductSummaryDTO> searchProducts(Area area, String keyword) {
         return modelMapper.map(savedProduct, ProductWithoutPhotosDTO.class);
     }
 
-// ================================ Update Product with Photos =======================================================
+    // ================================ Update Product with Photos =======================================================
     @Override
     public ProductWithPhotosDTO getProductWithPhotos(Long productId) {
         // Find the product or throw an error
@@ -249,6 +279,3 @@ public List<ProductSummaryDTO> searchProducts(Area area, String keyword) {
         return dto;
     }
 }
-
-
-
