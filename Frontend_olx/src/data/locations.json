@@ -1,0 +1,446 @@
+[
+    {
+        "location_id": 1,
+        "area": "PUNE_CITY"
+    },
+    {
+        "location_id": 2,
+        "area": "GHORPURI_BAZAR"
+    },
+    {
+        "location_id": 3,
+        "area": "NW_COLLEGE"
+    },
+    {
+        "location_id": 4,
+        "area": "DR_BA_CHOWK"
+    },
+    {
+        "location_id": 5,
+        "area": "CDA_O"
+    },
+    {
+        "location_id": 6,
+        "area": "BAJIRAO_ROAD"
+    },
+    {
+        "location_id": 7,
+        "area": "ASHOK_NAGAR_COLONY"
+    },
+    {
+        "location_id": 8,
+        "area": "AMMUNITION_FACTORY_KHADKI"
+    },
+    {
+        "location_id": 9,
+        "area": "KHADKI"
+    },
+    {
+        "location_id": 10,
+        "area": "KHADKI_BAZAR"
+    },
+    {
+        "location_id": 11,
+        "area": "HE_FACTORY"
+    },
+    {
+        "location_id": 12,
+        "area": "AR_SHALA"
+    },
+    {
+        "location_id": 13,
+        "area": "YERWADA"
+    },
+    {
+        "location_id": 14,
+        "area": "YERWADA_TS"
+    },
+    {
+        "location_id": 15,
+        "area": "AUNDH"
+    },
+    {
+        "location_id": 16,
+        "area": "BANER_ROAD"
+    },
+    {
+        "location_id": 17,
+        "area": "ASHOK_NAGAR"
+    },
+    {
+        "location_id": 18,
+        "area": "DAPODI"
+    },
+    {
+        "location_id": 19,
+        "area": "DAPODI_BAZAR"
+    },
+    {
+        "location_id": 20,
+        "area": "VADGAON_SHERI"
+    },
+    {
+        "location_id": 21,
+        "area": "VIMAN_NAGAR"
+    },
+    {
+        "location_id": 22,
+        "area": "N_9_DRD"
+    },
+    {
+        "location_id": 23,
+        "area": "DUKIRKLINE"
+    },
+    {
+        "location_id": 24,
+        "area": "DIGHI_CAMP"
+    },
+    {
+        "location_id": 25,
+        "area": "DHANORI"
+    },
+    {
+        "location_id": 26,
+        "area": "VISHRANTWADI"
+    },
+    {
+        "location_id": 27,
+        "area": "BOTANICAL_GARDEN_PUNE"
+    },
+    {
+        "location_id": 28,
+        "area": "ARMAMENT"
+    },
+    {
+        "location_id": 29,
+        "area": "BAVDHAN"
+    },
+    {
+        "location_id": 30,
+        "area": "SRPF"
+    },
+    {
+        "location_id": 31,
+        "area": "AUNDH_CAMP"
+    },
+    {
+        "location_id": 32,
+        "area": "SANGAVI"
+    },
+    {
+        "location_id": 33,
+        "area": "GONDHALE_NAGAR"
+    },
+    {
+        "location_id": 34,
+        "area": "HADAPSAR"
+    },
+    {
+        "location_id": 35,
+        "area": "SASANENAGAR"
+    },
+    {
+        "location_id": 36,
+        "area": "AIRPORT"
+    },
+    {
+        "location_id": 37,
+        "area": "IAF_STATION"
+    },
+    {
+        "location_id": 38,
+        "area": "VIDYANAGAR_PUNE"
+    },
+    {
+        "location_id": 39,
+        "area": "MUNDHVA"
+    },
+    {
+        "location_id": 40,
+        "area": "MUNDHVA_AV"
+    },
+    {
+        "location_id": 41,
+        "area": "BIBVEWADI"
+    },
+    {
+        "location_id": 42,
+        "area": "MARKET_YARD"
+    },
+    {
+        "location_id": 43,
+        "area": "SALISBURY_PARK"
+    },
+    {
+        "location_id": 44,
+        "area": "TV_NAGAR"
+    },
+    {
+        "location_id": 45,
+        "area": "BHUSARI_COLONY"
+    },
+    {
+        "location_id": 46,
+        "area": "AFMC"
+    },
+    {
+        "location_id": 47,
+        "area": "WANOWARIE"
+    },
+    {
+        "location_id": 48,
+        "area": "BHAVANI_PETH"
+    },
+    {
+        "location_id": 49,
+        "area": "BHUGAON"
+    },
+    {
+        "location_id": 50,
+        "area": "BHUKUM"
+    },
+    {
+        "location_id": 51,
+        "area": "ANDGAON"
+    },
+    {
+        "location_id": 52,
+        "area": "AMBALE"
+    },
+    {
+        "location_id": 53,
+        "area": "BANER_GAON"
+    },
+    {
+        "location_id": 54,
+        "area": "AMBEGAON_BK"
+    },
+    {
+        "location_id": 55,
+        "area": "AMBEGAON_PATHAR"
+    },
+    {
+        "location_id": 56,
+        "area": "AMBEGAON_BUDRUK"
+    },
+    {
+        "location_id": 57,
+        "area": "LOHOGAON"
+    },
+    {
+        "location_id": 58,
+        "area": "KHONDHWA_KH"
+    },
+    {
+        "location_id": 59,
+        "area": "KONDHWA_BK"
+    },
+    {
+        "location_id": 60,
+        "area": "KONDHWA_LH"
+    },
+    {
+        "location_id": 61,
+        "area": "NIBM"
+    },
+    {
+        "location_id": 62,
+        "area": "ANANDNAGAR_PUNE"
+    },
+    {
+        "location_id": 63,
+        "area": "MOHAMADWADI"
+    },
+    {
+        "location_id": 64,
+        "area": "KALEWADI"
+    },
+    {
+        "location_id": 65,
+        "area": "PIMPRI_COLONY"
+    },
+    {
+        "location_id": 66,
+        "area": "PIMPRI_WAGHIRE"
+    },
+    {
+        "location_id": 67,
+        "area": "PIMPRI_PF"
+    },
+    {
+        "location_id": 68,
+        "area": "NEHRUNAGAR"
+    },
+    {
+        "location_id": 69,
+        "area": "MASULKAR_COLONY"
+    },
+    {
+        "location_id": 70,
+        "area": "CHINCHWAD_EAST"
+    },
+    {
+        "location_id": 71,
+        "area": "MPHULENAGAR"
+    },
+    {
+        "location_id": 72,
+        "area": "BHOSARI_IE"
+    },
+    {
+        "location_id": 73,
+        "area": "INDRAYANINAGAR"
+    },
+    {
+        "location_id": 74,
+        "area": "CHINCHWADGAON"
+    },
+    {
+        "location_id": 75,
+        "area": "PUNAWALE"
+    },
+    {
+        "location_id": 76,
+        "area": "THATHAWADE"
+    },
+    {
+        "location_id": 77,
+        "area": "THERGAON"
+    },
+    {
+        "location_id": 78,
+        "area": "KASARWADI"
+    },
+    {
+        "location_id": 79,
+        "area": "AKURDI"
+    },
+    {
+        "location_id": 80,
+        "area": "BHOSARIGOAN"
+    },
+    {
+        "location_id": 81,
+        "area": "PCNT"
+    },
+    {
+        "location_id": 82,
+        "area": "YAMUNANAGAR"
+    },
+    {
+        "location_id": 83,
+        "area": "NIGDI"
+    },
+    {
+        "location_id": 84,
+        "area": "PIMPLE_GURAV"
+    },
+    {
+        "location_id": 85,
+        "area": "CHIKHALI"
+    },
+    {
+        "location_id": 86,
+        "area": "RUPEENAGAR"
+    },
+    {
+        "location_id": 87,
+        "area": "TALWADE"
+    },
+    {
+        "location_id": 88,
+        "area": "CHAKAN"
+    },
+    {
+        "location_id": 89,
+        "area": "AMBETHAN"
+    },
+    {
+        "location_id": 90,
+        "area": "BAHUL"
+    },
+    {
+        "location_id": 91,
+        "area": "BHOSE"
+    },
+    {
+        "location_id": 92,
+        "area": "ADHALE_BK"
+    },
+    {
+        "location_id": 93,
+        "area": "BEBEDHOL"
+    },
+    {
+        "location_id": 94,
+        "area": "CHANDKHED"
+    },
+    {
+        "location_id": 95,
+        "area": "AMBALE_2"
+    },
+    {
+        "location_id": 96,
+        "area": "AMBI"
+    },
+    {
+        "location_id": 97,
+        "area": "URSE"
+    },
+    {
+        "location_id": 98,
+        "area": "WAKSAI"
+    },
+    {
+        "location_id": 99,
+        "area": "HINJAWADI"
+    },
+    {
+        "location_id": 100,
+        "area": "MARUNJI"
+    },
+    {
+        "location_id": 101,
+        "area": "WAKAD"
+    },
+    {
+        "location_id": 102,
+        "area": "ALANDI_DEVACHI"
+    },
+    {
+        "location_id": 103,
+        "area": "CHAROLI_BK"
+    },
+    {
+        "location_id": 104,
+        "area": "CHIMBLI"
+    },
+    {
+        "location_id": 105,
+        "area": "WAGHOLI"
+    },
+    {
+        "location_id": 106,
+        "area": "ASHTAPUR"
+    },
+    {
+        "location_id": 107,
+        "area": "KESNAND"
+    },
+    {
+        "location_id": 108,
+        "area": "KOREGAON_BHIVAR"
+    },
+    {
+        "location_id": 109,
+        "area": "ALEGAON"
+    },
+    {
+        "location_id": 110,
+        "area": "ANDHALGAON"
+    },
+    {
+        "location_id": 111,
+        "area": "CHINCHANI_CAMP"
+    }
+]

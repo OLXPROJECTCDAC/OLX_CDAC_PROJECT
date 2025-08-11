@@ -24,5 +24,15 @@ export default defineConfig({
       'framer-motion'
     ],
     exclude: []
-  }
+  },
+  server: {
+    proxy: {
+      // Anything starting with /api will be forwarded to Spring Boot
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api/, ''), // /api/categories/all -> /categories/all
+      },
+    },
+  },
 })
